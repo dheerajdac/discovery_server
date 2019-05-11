@@ -1,0 +1,46 @@
+
+server:
+  port: ${PORT}
+
+spring:
+  profiles:
+    active: ${APPNAME}
+  cloud:
+    config:
+      uri
+---
+spring:
+  profiles: ${PEER1}
+eureka:
+  instance:
+    hostname: ${PEER1}
+  client:
+    registerWithEureka:  true
+    fetchRegistry:  true
+    serviceUrl:
+      defaultZone: http://${PEER2}:8762/eureka/,http://${PEER3}:8763/eureka/
+
+---
+spring:
+  profiles: ${PEER2}
+eureka:
+  instance:
+    hostname: ${PEER2}
+  client:
+    registerWithEureka:  true
+    fetchRegistry:  true
+    serviceUrl:
+      defaultZone: http://${PEER1}:8761/eureka/,http://${PEER3}:8763/eureka/
+
+
+---
+spring:
+  profiles: ${PEER3}
+eureka:
+  instance:
+    hostname: ${PEER3}
+  client:
+    registerWithEureka:  true
+    fetchRegistry:  true
+    serviceUrl:
+      defaultZone: http://${PEER1}:8761/eureka/,http://${PEER2}:8762/eureka/
