@@ -1,7 +1,7 @@
 pipeline {
 
     environment {
-        registry = "dheerajdac/config_server"
+        registry = "dheerajdac/discovery_server"
         registryCredential = 'dockerhub'
         dockerImage = ''
      }
