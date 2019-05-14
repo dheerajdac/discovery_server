@@ -2,7 +2,9 @@
 server:
   port: ${PORT}
 
+
 spring:
+  application: ${NAME}
   profiles:
     active: ${APPNAME}
 
