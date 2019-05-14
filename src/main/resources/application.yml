@@ -5,9 +5,7 @@ server:
 spring:
   profiles:
     active: ${APPNAME}
-  cloud:
-    config:
-      uri
+
 ---
 spring:
   profiles: ${PEER1}
