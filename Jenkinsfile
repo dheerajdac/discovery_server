@@ -13,16 +13,13 @@ pipeline {
                 agent {
                     docker {
                         image 'maven:3-alpine'
-                        args '-v /var/run/docker.sock:/var/run/docker.sock'
+                        args '-v $HOME/.m2:/root/.m2'
                     }
                 }
 
                 steps {
                     sh 'mvn -B clean package'
                     sh 'ls target'
-                    script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    }
                 }
             }
             stage('Building Image') {
