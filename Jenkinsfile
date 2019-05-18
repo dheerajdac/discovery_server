@@ -8,9 +8,8 @@ pipeline {
 
     agent any
 
-    def wsDir = getWorkspace(startTime)
-    ws (wsDir){
         stages {
+            ws ("/var/workspace/discovery_server"){
             stage('Build') {
                 agent {
                     docker {
@@ -47,8 +46,4 @@ pipeline {
             }
         }
     }
-}
-
-def getWorkspace(time) {
-    pwd().replace("%2F", "_") + '-' + time
 }
