@@ -18,7 +18,7 @@ pipeline {
 
             steps {
                 sh 'mvn -B clean package'
-                sh 'ls'
+                sh 'ls target'
             }
         }
         stage('Building Image') {
