@@ -20,7 +20,7 @@ pipeline {
                 steps {
                     sh 'mvn -B clean package'
                     sh 'ls target'
-                    sh 'cat Jenkinsfile'
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
             stage('Building Image') {
