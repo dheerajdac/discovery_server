@@ -20,9 +20,6 @@ pipeline {
                 steps {
                     sh 'mvn -B clean package'
                     sh 'ls target'
-                }
-
-                steps{
                     script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
