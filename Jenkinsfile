@@ -1,5 +1,5 @@
 pipeline {
-
+    ws("/var/workspace/discovery_server"){
     environment {
         registry = "dheerajdac/discovery_server"
         registryCredential = 'dockerhub'
@@ -9,7 +9,7 @@ pipeline {
     agent any
 
         stages {
-            ws ("/var/workspace/discovery_server"){
+
             stage('Build') {
                 agent {
                     docker {
