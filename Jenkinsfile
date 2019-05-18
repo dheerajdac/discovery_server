@@ -21,6 +21,7 @@ pipeline {
                 steps {
                     sh 'mvn -B clean package'
                     sh 'ls target'
+                    sh 'cat Jenkinsfile'
                 }
             }
             stage('Building Image') {
