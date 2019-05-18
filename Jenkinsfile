@@ -8,41 +8,46 @@ pipeline {
 
     agent any
 
-    stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
+    def wsDir = getWorkspace(startTime)
+    ws (wsDir){
+        stages {
+            stage('Build') {
+                agent {
+                    docker {
+                        image 'maven:3-alpine'
+                    }
                 }
-            }
 
-            steps {
-                sh 'mvn -B clean package'
-                sh 'ls target'
-            }
-        }
-        stage('Building Image') {
-            steps{
-                script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                steps {
+                    sh 'mvn -B clean package'
+                    sh 'ls target'
                 }
-             }
-        }
-        stage('Deploy Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+            }
+            stage('Building Image') {
+                steps{
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
+                 }
+            }
+            stage('Deploy Image') {
+                steps{
+                    script {
+                        docker.withRegistry( '', registryCredential ) {
+                            dockerImage.push()
+                        }
                     }
                 }
             }
-        }
-        stage('Remove Unused docker image') {
-            steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
+            stage('Remove Unused docker image') {
+                steps{
+                    sh "docker rmi $registry:$BUILD_NUMBER"
+                }
             }
         }
     }
+}
 
-
+def getWorkspace(time) {
+    pwd().replace("%2F", "_") + '-' + time
 }
