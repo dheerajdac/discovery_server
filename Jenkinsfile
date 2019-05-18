@@ -1,5 +1,4 @@
 pipeline {
-    ws("/var/workspace/discovery_server"){
     environment {
         registry = "dheerajdac/discovery_server"
         registryCredential = 'dockerhub'
@@ -45,5 +44,4 @@ pipeline {
                 }
             }
         }
-    }
 }
