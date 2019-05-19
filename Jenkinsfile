@@ -39,22 +39,16 @@ pipeline {
             }
         }
 
-        stage('Deploy qa01'){
-            steps{
-                script {
-                    dockerImage = docker.tag("$registry:$BUILD_NUMBER", registryLatest){
-                        docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
-                        }
-                    }
-                }
-            }
-        }
 
         stage('Remove Unused docker image') {
             steps{
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
+        }
+    }
+    post{
+        always{
+            sh 'mvn clean'
         }
     }
 }
