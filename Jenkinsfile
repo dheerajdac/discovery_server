@@ -1,6 +1,7 @@
 pipeline {
     environment {
         registry = "dheerajdac/discovery_server"
+        registryLatest = "dheerajdac/discovery_server:latest"
         registryCredential = 'dockerhub'
         dockerImage = ''
      }
@@ -41,9 +42,7 @@ pipeline {
         stage('Deploy qa01'){
             steps{
                 script {
-                def source = registry + ":$BUILD_NUMBER";
-                def target = registry + "qa01";
-                    dockerImage = docker.tag(source, target){
+                    dockerImage = docker.tag($registry:$BUILD_NUMBER, registryLatest){
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push()
                         }
