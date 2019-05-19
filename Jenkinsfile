@@ -2,6 +2,7 @@ pipeline {
     environment {
         registry = "dheerajdac/discovery_server"
         registryCredential = 'dockerhub'
+        artifact = ''
         dockerImage = ''
      }
 
@@ -10,6 +11,7 @@ pipeline {
         stages {
 
             stage('Build') {
+                ws('workspace/discovery_server_master'){
                 agent {
                     docker {
                         image 'maven:3-alpine'
@@ -21,6 +23,7 @@ pipeline {
                     sh 'mvn -B clean package'
                     sh 'ls target'
                     sh 'pwd'
+                }
                 }
             }
             stage('Building Image') {
