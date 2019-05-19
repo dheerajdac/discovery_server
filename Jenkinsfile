@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy qa01'){
             steps{
                 script {
-                    dockerImage = docker.tag($registry:$BUILD_NUMBER, registryLatest){
+                    dockerImage = docker.tag("$registry:$BUILD_NUMBER", registryLatest){
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push()
                         }
