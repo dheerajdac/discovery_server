@@ -11,7 +11,6 @@ pipeline {
         stages {
 
             stage('Build') {
-                ws('workspace/discovery_server_master'){
                 agent {
                     docker {
                         image 'maven:3-alpine'
@@ -23,7 +22,7 @@ pipeline {
                     sh 'mvn -B clean package'
                     sh 'ls target'
                     sh 'pwd'
-                }
+                    sh '$WORKSPACE'
                 }
             }
             stage('Building Image') {
