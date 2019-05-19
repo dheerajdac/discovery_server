@@ -41,7 +41,9 @@ pipeline {
         stage('Deploy qa01'){
             steps{
                 script {
-                    dockerImage = docker.tag(registry + ":$BUILD_NUMBER" , registry + "qa01"){
+                def source = registry + ":$BUILD_NUMBER";
+                def target = registry + "qa01";
+                    dockerImage = docker.tag(source, target){
                         docker.withRegistry( '', registryCredential ) {
                             dockerImage.push()
                         }
