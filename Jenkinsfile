@@ -39,7 +39,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Image') {
+        stage('Deploy Image qa01') {
             steps{
                 script {
                     dockerImage = docker.tag registry + ":$BUILD_NUMBER" registryLatest
