@@ -6,23 +6,22 @@ pipeline {
         dockerImage = ''
      }
 
-    agent any
+    agent {
+                        docker {
+                            image 'dheerajdac/ubuntu:8'
+                            args '-v $HOME/.m2:/root/.m2'
+                        }
+                    }
 
         stages {
 
             stage('Build') {
-                agent {
-                    docker {
-                        image 'maven:3-alpine'
-                        args '-v $HOME/.m2:/root/.m2'
-                    }
-                }
+
 
                 steps {
                     sh 'mvn -B clean package'
                     sh 'ls target'
                     sh 'pwd'
-                    sh '$WORKSPACE'
                 }
             }
             stage('Building Image') {
