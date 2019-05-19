@@ -27,7 +27,6 @@ pipeline {
             stage('Building Image') {
                 steps{
                     sh 'pwd'
-                    sh 'mvn'
                     script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
                     }
