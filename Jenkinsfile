@@ -39,6 +39,14 @@ pipeline {
             }
         }
 
+        stage('Deploy Image') {
+            steps{
+                script {
+                    dockerImage = docker.tag registry + ":$BUILD_NUMBER" registryLatest
+                }
+            }
+        }
+
 
         stage('Remove Unused docker image') {
             steps{
@@ -46,6 +54,7 @@ pipeline {
             }
         }
     }
+
     post{
         always{
             sh 'mvn clean'
