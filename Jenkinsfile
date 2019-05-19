@@ -39,14 +39,23 @@ pipeline {
             }
         }
 
-        stage('Deploy Image qa01') {
+        stage('Building Image qa01') {
             steps{
                 script {
-                    dockerImage = docker.tag registry + ":$BUILD_NUMBER" registryLatest
+                    dockerImage = docker.build registryLatest
                 }
             }
         }
 
+        stage('Deploy Image qa01') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
 
         stage('Remove Unused docker image') {
             steps{
