@@ -4,7 +4,7 @@ HELP.md
 /.idea/
 /esdata*/
 /.mvn/
-
+/.vscode/
 
 ### STS ###
 .apt_generated

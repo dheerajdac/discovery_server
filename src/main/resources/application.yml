@@ -2,7 +2,6 @@
 server:
   port: ${PORT}
 
-
 spring:
   profiles:
     active: ${APPNAME}
@@ -18,7 +17,6 @@ eureka:
     fetchRegistry:  true
     serviceUrl:
       defaultZone: http://${PEER2}:8762/eureka/,http://${PEER3}:8763/eureka/
-
 ---
 spring:
   profiles: ${PEER2}
