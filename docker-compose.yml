@@ -1,7 +1,7 @@
 version: "3"
 services:
   discovery-server-1:
-    image: dheerajdac/discovery_server:qa01
+    build: .
     ports:
       - "8761:8761"
     networks:
@@ -16,7 +16,7 @@ services:
         - NAME=discovery_server
         - CONFIG_SERVER=config_server
   discovery-server-2:
-    image: dheerajdac/discovery_server:qa01
+    build: .
     networks:
         - webnet
     ports:
@@ -30,7 +30,7 @@ services:
         - NAME=discovery_server
         - APPNAME=discovery-server-2
   discovery-server-3:
-    image: dheerajdac/discovery_server:qa01
+    build: .
     networks:
         - webnet
     ports:
