@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy Image') {
             steps{
                 script {
-                    docker.withRegistry( registryUrl , registryCredential ) {
+                    docker.withRegistry( '' , registryCredential ) {
                         dockerImage.push()
                     }
                 }
@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy Image qa01') {
             steps{
                 script {
-                    docker.withRegistry( registryUrl, registryCredential ) {
+                    docker.withRegistry( '', registryCredential ) {
                         dockerImage.push()
                     }
                 }
