@@ -3,7 +3,7 @@ pipeline {
         registry = "dheerajdac/discovery_server"
         registryqa01 = "dheerajdac/discovery_server:qa01"
         registryCredential = 'dockerhub'
-        registryUrl = 'registry.hub.docker.com'
+        registryUrl = 'docker.io'
         dockerImage = ''
      }
 
