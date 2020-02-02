@@ -3,7 +3,7 @@ pipeline {
         registry = "dheerajdac/discovery_server"
         registryqa01 = "dheerajdac/discovery_server:qa01"
         registryCredential = 'dockerhub'
-        registryUrl = 'docker.com'
+        registryUrl = 'https://registry.hub.docker.com'
         dockerImage = ''
      }
 
@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy Image') {
             steps{
                 script {
-                    docker.withRegistry( '' , registryCredential ) {
+                    docker.withRegistry( registryUrl , registryCredential ) {
                         dockerImage.push()
                     }
                 }
@@ -51,7 +51,7 @@ pipeline {
         stage('Deploy Image qa01') {
             steps{
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry( registryUrl, registryCredential ) {
                         dockerImage.push()
                     }
                 }
